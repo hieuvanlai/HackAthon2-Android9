@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="planets_array">
+        <item >PC Gaming</item>
+        <item>PC Workstation</item>
+        <item>PC Multimedia</item>
+        <item>PC Office</item>
+    </string-array>
+</resources>
