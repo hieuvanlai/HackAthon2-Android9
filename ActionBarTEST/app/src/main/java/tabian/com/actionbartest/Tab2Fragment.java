@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class Tab2Fragment extends Fragment {
@@ -25,4 +26,10 @@ public class Tab2Fragment extends Fragment {
 
         return view;
     }
+    public static Tab2Fragment newInstance() {
+        Tab2Fragment fragment = new Tab2Fragment();
+        return fragment;
+    }
+
+
 }

@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.sql.SQLOutput;
+import java.util.Date;
 
 
 public class Tab1Fragment extends Fragment {
@@ -23,7 +24,6 @@ public class Tab1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment1_layout,container,false);
 
-        Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show();
 
         mListView = (ListView) view.findViewById(R.id.listView);
         mListView.setAdapter(MainActivity2.cpuAdapter);
@@ -34,7 +34,14 @@ public class Tab1Fragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        Toast.makeText(getActivity(),"onPauseText!",Toast.LENGTH_SHORT).show();
     }
+    public static Tab1Fragment newInstance() {
+        Tab1Fragment fragment = new Tab1Fragment();
+        return fragment;
+    }
+    public void   UpdateAdapter(){
+        mListView.setAdapter(MainActivity2.cpuAdapter);
+    }
+
 
 }

@@ -22,5 +22,13 @@ public class Tab3Fragment extends Fragment {
         mListView.setAdapter(MainActivity2.ramAdapter);
         return view;
     }
+    public static Tab3Fragment newInstance() {
+        Tab3Fragment fragment = new Tab3Fragment();
+        return fragment;
+    }
+    public void   UpdateAdapter(){
+        mListView.setAdapter(MainActivity2.cpuAdapter);
+    }
+
 
 }

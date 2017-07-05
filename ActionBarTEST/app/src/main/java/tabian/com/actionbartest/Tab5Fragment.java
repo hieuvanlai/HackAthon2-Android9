@@ -25,4 +25,12 @@ public class Tab5Fragment extends Fragment {
 
         return view;
     }
+    public static Tab5Fragment newInstance() {
+        Tab5Fragment fragment = new Tab5Fragment();
+        return fragment;
+    }
+    public void   UpdateAdapter(){
+        mListView.setAdapter(MainActivity2.cpuAdapter);
+    }
+
 }

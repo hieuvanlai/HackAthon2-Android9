@@ -3,9 +3,13 @@ package tabian.com.actionbartest;
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import tabian.com.actionbartest.adapter.CpuAdapter;
@@ -15,15 +19,14 @@ import tabian.com.actionbartest.adapter.RamAdapter;
 import tabian.com.actionbartest.adapter.VgaAdapter;
 import tabian.com.actionbartest.databases.DatabaseHandle;
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity2 extends FragmentActivity {
 
     private static final String TAG = "MainActivity";
-
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
     private ViewPager mViewPager;
 
     TabLayout tabLayout;
+
     public static MainAdapter mainAdapter ;
     public static CpuAdapter cpuAdapter ;
     public static RamAdapter ramAdapter ;
@@ -34,7 +37,9 @@ public class MainActivity2 extends AppCompatActivity {
     private  Integer price;
     private int option[];
     public  static  String socket="";
-
+    public String getTabFragmentB(){
+        return socket;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,6 @@ public class MainActivity2 extends AppCompatActivity {
         }
 
 
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -96,7 +100,7 @@ public class MainActivity2 extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new Tab1Fragment());
-        adapter.addFragment(new Tab2Fragment());
+        adapter.addFragment( Tab2Fragment.newInstance());
         adapter.addFragment(new Tab3Fragment());
         adapter.addFragment(new Tab4Fragment());
         adapter.addFragment(new Tab5Fragment());
@@ -107,7 +111,6 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
@@ -127,4 +130,5 @@ public class MainActivity2 extends AppCompatActivity {
         super.onPause();
         Toast.makeText(this, "onRestart", Toast.LENGTH_SHORT).show();
     }
+
 }
