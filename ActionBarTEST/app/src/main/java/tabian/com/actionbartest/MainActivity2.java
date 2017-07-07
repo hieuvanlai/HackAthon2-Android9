@@ -3,23 +3,16 @@ package tabian.com.actionbartest;
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import tabian.com.actionbartest.adapter.CpuAdapter;
 import tabian.com.actionbartest.adapter.MainAdapter;
-import tabian.com.actionbartest.adapter.PsuAdapter;
-import tabian.com.actionbartest.adapter.RamAdapter;
-import tabian.com.actionbartest.adapter.VgaAdapter;
+import tabian.com.actionbartest.adapter.ProductAdapter;
 import tabian.com.actionbartest.databases.DatabaseHandle;
 
-public class MainActivity2 extends FragmentActivity {
+public  class MainActivity2 extends FragmentActivity {
 
     private static final String TAG = "MainActivity";
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -29,17 +22,19 @@ public class MainActivity2 extends FragmentActivity {
 
     public static MainAdapter mainAdapter ;
     public static CpuAdapter cpuAdapter ;
-    public static RamAdapter ramAdapter ;
-    public static VgaAdapter vgaAdapter ;
-    public static PsuAdapter psuAdapter ;
-    private  String color="";
+
+
+    public static   String color="";
     private Integer pc;
-    private  Integer price;
+    public static   Integer price;
+    public static String socket="";
     private int option[];
-    public  static  String socket="";
-    public String getTabFragmentB(){
-        return socket;
-    }
+
+
+
+
+    public static String ramSupport="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +81,13 @@ public class MainActivity2 extends FragmentActivity {
         tabLayout.getTabAt(2).setIcon(R.drawable.ram);
         tabLayout.getTabAt(3).setIcon(R.drawable.cards);
         tabLayout.getTabAt(4).setIcon(R.drawable.psu);
+        tabLayout.getTabAt(5).setIcon(R.drawable.disk);
+        tabLayout.getTabAt(6).setIcon(R.drawable.computer);
+
 
         mainAdapter= new MainAdapter(this, R.layout.item_list_build_pc, DatabaseHandle.getInstance(this).getListMainModels("",color));
         cpuAdapter= new CpuAdapter(this, R.layout.item_list_build_pc, DatabaseHandle.getInstance(this).getListCpuModels(pc));
-        Toast.makeText(this, "Oncreate", Toast.LENGTH_SHORT).show();
-        ramAdapter= new RamAdapter(this, R.layout.item_list_build_pc, DatabaseHandle.getInstance(this).getListProductModels(color,"DDR4"));
-        vgaAdapter= new VgaAdapter(this, R.layout.item_list_build_pc, DatabaseHandle.getInstance(this).getListProductModels(color,null));
-        psuAdapter= new PsuAdapter(this, R.layout.item_list_build_pc, DatabaseHandle.getInstance(this).getListProductModels(null,null));
+
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
     }
@@ -100,35 +95,12 @@ public class MainActivity2 extends FragmentActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new Tab1Fragment());
-        adapter.addFragment( Tab2Fragment.newInstance());
-        adapter.addFragment(new Tab3Fragment());
-        adapter.addFragment(new Tab4Fragment());
-        adapter.addFragment(new Tab5Fragment());
+        adapter.addFragment( Tab2Fragment.newInstance);
+        adapter.addFragment( Tab3Fragment.ramFragment);
+        adapter.addFragment( new Tab4Fragment());
+        adapter.addFragment( new Tab5Fragment());
+        adapter.addFragment( new Tab6Fragment());
+        adapter.addFragment( new Tab7Fragment());
         viewPager.setAdapter(adapter);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Toast.makeText(this, "onRestart", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(this, "onRestart", Toast.LENGTH_SHORT).show();
-    }
-
 }

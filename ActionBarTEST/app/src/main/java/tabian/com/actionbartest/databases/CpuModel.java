@@ -17,8 +17,6 @@ public class CpuModel  extends ProductModel {
         this.socket = socket;
     }
 
-
-
     public String getSocket() {
         return socket;
     }

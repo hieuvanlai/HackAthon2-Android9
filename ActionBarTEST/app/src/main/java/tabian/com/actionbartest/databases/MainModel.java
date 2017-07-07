@@ -8,14 +8,24 @@ public class MainModel extends ProductModel {
 
     private String socket;
     private String ramsupport;
+    private String size;
 
-    public MainModel(String species, String description, Integer price, String image, String socket, String ramsupport) {
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public MainModel(String species, String description, Integer price, String image, String socket, String ramsupport, String size) {
         this.species = species;
         this.description = description;
         this.price = price;
         this.image = image;
         this.socket = socket;
         this.ramsupport = ramsupport;
+        this.size=size;
     }
 
 

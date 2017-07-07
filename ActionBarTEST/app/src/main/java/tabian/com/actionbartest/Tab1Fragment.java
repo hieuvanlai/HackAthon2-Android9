@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class Tab1Fragment extends Fragment {
         mListView = (ListView) view.findViewById(R.id.listView);
         mListView.setAdapter(MainActivity2.cpuAdapter);
 
+
         return view;
     }
 
@@ -35,13 +37,7 @@ public class Tab1Fragment extends Fragment {
     public void onPause() {
         super.onPause();
     }
-    public static Tab1Fragment newInstance() {
-        Tab1Fragment fragment = new Tab1Fragment();
-        return fragment;
-    }
-    public void   UpdateAdapter(){
-        mListView.setAdapter(MainActivity2.cpuAdapter);
-    }
+
 
 
 }

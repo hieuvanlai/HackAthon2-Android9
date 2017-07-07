@@ -18,9 +18,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import tabian.com.actionbartest.Card;
 import tabian.com.actionbartest.R;
 import tabian.com.actionbartest.Tab2Fragment;
+import tabian.com.actionbartest.Tab3Fragment;
 import tabian.com.actionbartest.databases.CpuModel;
 
 /**
@@ -58,7 +58,7 @@ public class CpuAdapter extends ArrayAdapter<CpuModel> {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Tab2Fragment.newInstance().UpdateAdapter();
+                Tab2Fragment.newInstance.Update(cpuModel.getSocket());
             }
         });
 
