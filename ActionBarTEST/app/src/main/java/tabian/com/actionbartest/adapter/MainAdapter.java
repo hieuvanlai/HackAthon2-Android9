@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -16,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
+import tabian.com.actionbartest.MainActivity2;
 import tabian.com.actionbartest.R;
 import tabian.com.actionbartest.Tab3Fragment;
 import tabian.com.actionbartest.Tab7Fragment;
@@ -49,7 +52,9 @@ public class MainAdapter extends ArrayAdapter<MainModel> {
         TextView tv_price= (TextView) convertView.findViewById(R.id.tv_price);
         ImageView ivStory = (ImageView) convertView.findViewById(R.id.iv_story);
         tv_species.setText(mainModel.getSpecies());
-        tv_price.setText(mainModel.getPrice().toString()+"(VND)");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String numberAsString = decimalFormat.format(mainModel.getPrice());
+        tv_price.setText(numberAsString+"(VND)");
         String image[] = mainModel.getImage().split(",");
         byte[] decodeByte = Base64.decode(image[1],Base64.DEFAULT);
         Bitmap bitmap= BitmapFactory.decodeByteArray(decodeByte,0,decodeByte.length);
@@ -59,9 +64,8 @@ public class MainAdapter extends ArrayAdapter<MainModel> {
             @Override
             public void onClick(View v) {
                 Tab3Fragment.ramFragment.Update(mainModel.getRamsupport());
-
                 Tab7Fragment.size=mainModel.getSize();
-
+                MainActivity2.mViewPager.setCurrentItem(MainActivity2.page+1,true);
 
             }
         });

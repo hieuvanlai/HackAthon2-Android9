@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,7 +14,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Spinner spinner;
     private CheckBox cbwhite, cbgreen, cbblue,cbred,cbrgb;
     int option[] = new  int[3];
+    EditText etPrice;
 
     EditText pricetext;
 
@@ -43,6 +49,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cbblue= (CheckBox) findViewById(R.id.checkBox2);
         cbred= (CheckBox) findViewById(R.id.checkBox3);
         cbrgb= (CheckBox) findViewById(R.id.checkBox4);
+        pricetext= (EditText) findViewById(R.id.et_price);
+        pricetext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                pricetext.removeTextChangedListener(this);
+
+                try {
+                    String originalString = s.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    pricetext.setText(formattedString);
+                    pricetext.setSelection(pricetext.getText().length());
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+                pricetext.addTextChangedListener(this);
+            }
+        });
+
         if (cbwhite.isChecked()) {
             cbgreen.setChecked(false);
         }
@@ -103,10 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -164,14 +205,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,"Mời Nhập Số Tiền",Toast.LENGTH_LONG).show();
         }else {
             Intent intent  = new Intent(this,MainActivity2.class);
-            option[0] = Integer.parseInt(String.valueOf(pricetext.getText())) ;
+            option[0] = 10 ;
             intent.putExtra("option",option);
             startActivity(intent);
         }
-
-
-
-
-
     }
+
 }

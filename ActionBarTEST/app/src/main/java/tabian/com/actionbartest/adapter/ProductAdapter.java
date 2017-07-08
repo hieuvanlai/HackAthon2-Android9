@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
+import tabian.com.actionbartest.MainActivity2;
 import tabian.com.actionbartest.R;
+import tabian.com.actionbartest.Tab2Fragment;
 import tabian.com.actionbartest.databases.ProductModel;
 
 /**
@@ -45,7 +49,9 @@ public class ProductAdapter extends ArrayAdapter<ProductModel> {
         TextView tv_price= (TextView) convertView.findViewById(R.id.tv_price);
         ImageView ivStory = (ImageView) convertView.findViewById(R.id.iv_story);
         tv_species.setText(productModel.getSpecies());
-        tv_price.setText(productModel.getPrice().toString()+"(VND)");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String numberAsString = decimalFormat.format(productModel.getPrice());
+        tv_price.setText(numberAsString+"(VND)");
         try {
             String image[] = productModel.getImage().split(",");
             byte[] decodeByte = Base64.decode(image[1],Base64.DEFAULT);
@@ -55,8 +61,19 @@ public class ProductAdapter extends ArrayAdapter<ProductModel> {
         catch (Exception e){
             ivStory.setImageResource(R.drawable.cards);
         }
+        CardView cardView = (CardView) convertView.findViewById(R.id.cv_listProduct);
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity2.page!=6){
+                    MainActivity2.mViewPager.setCurrentItem(MainActivity2.page+1,true);
+                }
 
 
+
+            }
+        });
         return convertView;
     }
 }

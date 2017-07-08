@@ -6,6 +6,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import tabian.com.actionbartest.adapter.CpuAdapter;
 import tabian.com.actionbartest.adapter.MainAdapter;
@@ -16,7 +19,8 @@ public  class MainActivity2 extends FragmentActivity {
 
     private static final String TAG = "MainActivity";
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
+    public  static ViewPager mViewPager;
+    public static int page;
 
     TabLayout tabLayout;
 
@@ -29,9 +33,6 @@ public  class MainActivity2 extends FragmentActivity {
     public static   Integer price;
     public static String socket="";
     private int option[];
-
-
-
 
     public static String ramSupport="";
 
@@ -72,6 +73,25 @@ public  class MainActivity2 extends FragmentActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i2) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                page=i;
+
+                }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);

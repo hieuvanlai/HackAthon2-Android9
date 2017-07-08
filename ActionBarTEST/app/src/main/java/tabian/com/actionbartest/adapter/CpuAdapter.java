@@ -16,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
+import tabian.com.actionbartest.MainActivity2;
 import tabian.com.actionbartest.R;
 import tabian.com.actionbartest.Tab2Fragment;
 import tabian.com.actionbartest.Tab3Fragment;
@@ -49,19 +51,26 @@ public class CpuAdapter extends ArrayAdapter<CpuModel> {
         TextView tv_price= (TextView) convertView.findViewById(R.id.tv_price);
         ImageView ivStory = (ImageView) convertView.findViewById(R.id.iv_story);
         tv_species.setText(cpuModel.getSpecies());
-        tv_price.setText(cpuModel.getPrice().toString()+"(VND)");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String numberAsString = decimalFormat.format(cpuModel.getPrice());
+        tv_price.setText(numberAsString+"(VND)");
         String image[] = cpuModel.getImage().split(",");
         byte[] decodeByte = Base64.decode(image[1],Base64.DEFAULT);
         Bitmap bitmap= BitmapFactory.decodeByteArray(decodeByte,0,decodeByte.length);
         ivStory.setImageBitmap(bitmap);
         CardView cardView = (CardView) convertView.findViewById(R.id.cv_listProduct);
+
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Tab2Fragment.newInstance.Update(cpuModel.getSocket());
+                MainActivity2.mViewPager.setCurrentItem(MainActivity2.page+1,true);
+
+
+
+
             }
         });
-
         return convertView;
     }
 }

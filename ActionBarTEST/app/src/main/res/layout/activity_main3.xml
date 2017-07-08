@@ -25,7 +25,7 @@
                 android:paddingRight="10dp"
                 android:hint="Số Tiền Bạn Có (VND)"
                 android:drawablePadding="10dp"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:id="@+id/et_price"
                 android:drawableLeft="@drawable/ic_monetization_on_black_24dp"
                 />

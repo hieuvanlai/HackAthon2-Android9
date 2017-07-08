@@ -27,22 +27,9 @@ public class Tab7Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment1_layout,container,false);
         mListView = (ListView) view.findViewById(R.id.listView);
-        ProductAdapter productAdapter = new ProductAdapter(getActivity(),R.layout.item_list_build_pc,DatabaseHandle.getInstance(getActivity()).getListProductModels("Case",MainActivity2.color,""));
+        ProductAdapter productAdapter = new ProductAdapter(getActivity(),R.layout.item_list_build_pc,DatabaseHandle.getInstance(getActivity()).getListProductModels("Case",MainActivity2.color,size));
         mListView.setAdapter(productAdapter);
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (size.equals(size2)){
-
-        }else {
-            ProductAdapter productAdapter = new ProductAdapter(getActivity(),R.layout.item_list_build_pc,DatabaseHandle.getInstance(getActivity()).getListProductModels("Case",MainActivity2.color,size));
-            mListView.setAdapter(productAdapter);
-            size2=size;
-        }
-
     }
 
 }
