@@ -3,6 +3,7 @@ package tabian.com.actionbartest.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import tabian.com.actionbartest.MainActivity2;
 import tabian.com.actionbartest.R;
+import tabian.com.actionbartest.Tab1Fragment;
 import tabian.com.actionbartest.Tab2Fragment;
 import tabian.com.actionbartest.Tab3Fragment;
 import tabian.com.actionbartest.databases.CpuModel;
@@ -33,6 +35,7 @@ public class CpuAdapter extends ArrayAdapter<CpuModel> {
     private Context context;
     private int resource;
     private List<CpuModel> cpuModelList;
+    private int potioncheck;
 
     public CpuAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<CpuModel> objects) {
         super(context, resource, objects);
@@ -43,7 +46,7 @@ public class CpuAdapter extends ArrayAdapter<CpuModel> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(R.layout.item_list_build_pc,null);
         final CpuModel cpuModel =  cpuModelList.get(position);
@@ -59,18 +62,21 @@ public class CpuAdapter extends ArrayAdapter<CpuModel> {
         Bitmap bitmap= BitmapFactory.decodeByteArray(decodeByte,0,decodeByte.length);
         ivStory.setImageBitmap(bitmap);
         CardView cardView = (CardView) convertView.findViewById(R.id.cv_listProduct);
+        View view = convertView.findViewById(R.id.v_color);
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                potioncheck=position;
                 Tab2Fragment.newInstance.Update(cpuModel.getSocket());
                 MainActivity2.mViewPager.setCurrentItem(MainActivity2.page+1,true);
-
-
-
+                Tab1Fragment.Update();
 
             }
         });
+        if (potioncheck==position){
+            view.setBackgroundColor(Color.RED);
+        }
         return convertView;
     }
 }

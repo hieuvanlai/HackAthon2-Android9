@@ -17,8 +17,7 @@ import java.util.Date;
 
 public class Tab1Fragment extends Fragment {
     private static final String TAG = "Tab1Fragment";
-
-    private ListView mListView;
+    private static ListView mListView;
 
     @Nullable
     @Override
@@ -28,12 +27,11 @@ public class Tab1Fragment extends Fragment {
         mListView.setAdapter(MainActivity2.cpuAdapter);
         return view;
     }
-
     @Override
     public void onPause() {
         super.onPause();
     }
-
-
-
+    public  static void Update(){
+        mListView.setAdapter(MainActivity2.cpuAdapter);
+    }
 }

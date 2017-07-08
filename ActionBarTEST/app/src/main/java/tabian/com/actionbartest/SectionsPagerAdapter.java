@@ -49,7 +49,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter implements  ViewP
 
     @Override
     public void onPageSelected(int position) {
-
     }
 
     @Override

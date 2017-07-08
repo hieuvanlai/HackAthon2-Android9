@@ -195,11 +195,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 cbgreen.setChecked(false);
                 option[2]=5;
                 break;
-
         }
-
     }
-
     private void startReading() {
         if (String.valueOf(pricetext.getText()).equals("")){
             Toast.makeText(this,"Mời Nhập Số Tiền",Toast.LENGTH_LONG).show();
